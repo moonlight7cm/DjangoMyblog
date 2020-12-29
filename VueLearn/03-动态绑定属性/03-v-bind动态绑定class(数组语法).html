@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+		.active{
+			color: red;
+		}
+    </style>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<h2 :class="['title',classname1,classname2]">{{message}}，三个class，其中2个由数组传递</h2>
+	</div>
+
+	<script>
+		const app=new Vue({
+			el:'#app',
+			data:{
+				message:'hello',
+				classname1:'active',
+				classname2:'line'
+			}
+			
+		})
+
+	</script>
+</body>
+</html>
