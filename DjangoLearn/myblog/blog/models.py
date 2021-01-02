@@ -51,18 +51,16 @@ class Article(models.Model):
     # 使用外键关联标签表与标签是多对多关系
     img = models.ImageField(upload_to='article_img/%Y/%m/%d/', verbose_name='文章图片', blank=True, null=True)
     body = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='作者')
+    """
+    文章作者，这里User是从django.contrib.auth.models导入的。
+    这里我们通过 ForeignKey 把文章和 User 关联了起来。
+    """
+    views = models.PositiveIntegerField('阅读量', default=0)
+    tui = models.ForeignKey(Tui, on_delete=models.DO_NOTHING, verbose_name='推荐位', blank=True, null=True)
 
-
-user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='作者')
-"""
-文章作者，这里User是从django.contrib.auth.models导入的。
-这里我们通过 ForeignKey 把文章和 User 关联了起来。
-"""
-views = models.PositiveIntegerField('阅读量', default=0)
-tui = models.ForeignKey(Tui, on_delete=models.DO_NOTHING, verbose_name='推荐位', blank=True, null=True)
-
-created_time = models.DateTimeField('发布时间', auto_now_add=True)
-modified_time = models.DateTimeField('修改时间', auto_now=True)
+    created_time = models.DateTimeField('发布时间', auto_now_add=True)
+    modified_time = models.DateTimeField('修改时间', auto_now=True)
 
 
 class Meta:
